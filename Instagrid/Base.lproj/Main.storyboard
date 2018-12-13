@@ -85,9 +85,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view clipsSubviews="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO">
+                            <view clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO">
                                 <rect key="frame" x="15" y="161" width="345" height="345"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-aw-c0Z">
                                         <rect key="frame" x="5" y="5" width="330" height="330"/>
@@ -147,9 +146,18 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.015775226056575775" green="0.3959292471408844" blue="0.60368543863296509" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="345" id="0Rr-Ea-ubw"/>
+                                    <constraint firstAttribute="height" constant="345" id="4Bt-mE-lwt"/>
+                                    <constraint firstAttribute="width" secondItem="3oA-mu-gHO" secondAttribute="height" multiplier="1:1" id="GDJ-II-Hhb"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.71360510587692261" green="0.84258151054382324" blue="0.90132403373718262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3oA-mu-gHO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="1TO-Gn-bw7"/>
+                            <constraint firstItem="3oA-mu-gHO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5f1-Cm-Uk7"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
