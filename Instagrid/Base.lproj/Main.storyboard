@@ -89,8 +89,9 @@
                                 <rect key="frame" x="15" y="161" width="345" height="345"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-aw-c0Z">
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-aw-c0Z">
                                         <rect key="frame" x="5" y="5" width="330" height="330"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="q7y-vy-hWg">
                                                 <rect key="frame" x="0.0" y="0.0" width="330" height="160"/>
@@ -143,14 +144,6 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="q7y-vy-hWg" firstAttribute="leading" secondItem="zI1-aw-c0Z" secondAttribute="leading" id="HKf-tp-D9G"/>
-                                            <constraint firstItem="q7y-vy-hWg" firstAttribute="top" secondItem="zI1-aw-c0Z" secondAttribute="top" id="a1W-YT-Yke"/>
-                                            <constraint firstAttribute="trailing" secondItem="q7y-vy-hWg" secondAttribute="trailing" id="cUI-6e-Re3"/>
-                                            <constraint firstAttribute="trailing" secondItem="bep-Rn-dUm" secondAttribute="trailing" id="i97-9R-Qwi"/>
-                                            <constraint firstAttribute="bottom" secondItem="bep-Rn-dUm" secondAttribute="bottom" id="l69-Wr-U2R"/>
-                                            <constraint firstItem="bep-Rn-dUm" firstAttribute="leading" secondItem="zI1-aw-c0Z" secondAttribute="leading" id="lnl-d3-YAp"/>
-                                        </constraints>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.015775226056575775" green="0.3959292471408844" blue="0.60368543863296509" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
