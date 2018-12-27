@@ -12,10 +12,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self
+        imagePicker1.delegate = self
+        imagePicker2.delegate = self
+        imagePicker3.delegate = self
+        imagePicker4.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
-    let imagePicker = UIImagePickerController()
+    let imagePicker1 = UIImagePickerController()
+    let imagePicker2 = UIImagePickerController()
+    let imagePicker3 = UIImagePickerController()
+    let imagePicker4 = UIImagePickerController()
     
     @IBOutlet weak var TLView: UIView!
     @IBOutlet weak var TRView: UIView!
@@ -53,43 +59,41 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
         }
         dismiss(animated: true, completion: nil)
-        mainTopLeftImage.image = selectedImage
+        if picker == imagePicker1 {
+            mainTopLeftImage.image = selectedImage
+        } else if picker == imagePicker2 {
+            mainTopRightImage.image = selectedImage
+        } else if picker == imagePicker3 {
+            mainBottomLeftImage.image = selectedImage
+        } else if picker == imagePicker4 {
+            mainBottomRightImage.image = selectedImage
+        }
+        
     }
 
 
     ///
 
     @IBAction func didTapTopLeftImg(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.delegate = self
-        present(imagePickerController, animated: true, completion: nil)
+        imagePicker1.sourceType = .photoLibrary
+        present(imagePicker1, animated: true, completion: nil)
         
     }
     
   
     @IBAction func didTapTopRightImg(_ sender: Any) {
-        let imagePickerController2 = UIImagePickerController()
-        imagePickerController2.sourceType = .photoLibrary
-        imagePickerController2.delegate = self
-        present(imagePickerController2, animated: true, completion: nil)
+        imagePicker2.sourceType = .photoLibrary
+        present(imagePicker2, animated: true, completion: nil)
         
     }
     @IBAction func didTapBottomLeftImg(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.delegate = self
-        present(imagePickerController, animated: true, completion: nil)
-        
+        imagePicker3.sourceType = .photoLibrary
+        present(imagePicker3, animated: true, completion: nil)
     }
     
     @IBAction func didTapBottomRightImg(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.sourceType = .photoLibrary
-        imagePickerController.delegate = self
-        present(imagePickerController, animated: true, completion: nil)
-
-        
+        imagePicker4.sourceType = .photoLibrary
+        present(imagePicker4, animated: true, completion: nil)
     }
     
     @IBAction func didTapViewLeftMenu(_ sender: Any) {
