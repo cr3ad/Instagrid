@@ -18,42 +18,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         imagePicker4.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    var photoView = PhotoView()
     let imagePicker1 = UIImagePickerController()
     let imagePicker2 = UIImagePickerController()
     let imagePicker3 = UIImagePickerController()
     let imagePicker4 = UIImagePickerController()
-    
-    @IBOutlet weak var TLView: UIView!
-    @IBOutlet weak var TRView: UIView!
-    @IBOutlet weak var BLView: UIView!
-    @IBOutlet weak var BRView: UIView!
-
-    @IBOutlet weak var mainTopLeftButton: UIButton!
-    @IBOutlet weak var mainTopRightButton: UIButton!
-    @IBOutlet weak var mainBottomLeftButton: UIButton!
-    @IBOutlet weak var mainBottomRightButton: UIButton!
     
     @IBOutlet weak var mainTopLeftImage: UIImageView!
     @IBOutlet weak var mainTopRightImage: UIImageView!
     @IBOutlet weak var mainBottomLeftImage: UIImageView!
     @IBOutlet weak var mainBottomRightImage: UIImageView!
     
-    @IBOutlet weak var BottomViewLeftView: UIView!
-    @IBOutlet weak var BottomViewCenterView: UIView!
-    @IBOutlet weak var BottomViewRightView: UIView!
-    @IBOutlet weak var bottomButtonLeft: UIButton!
-    @IBOutlet weak var bottomButtonCenter: UIButton!
-    @IBOutlet weak var bottomButtonRight: UIButton!
-    
-    
-    
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    ////
-    
+ 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
@@ -71,13 +51,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
     }
 
-
-    ///
-
     @IBAction func didTapTopLeftImg(_ sender: Any) {
         imagePicker1.sourceType = .photoLibrary
         present(imagePicker1, animated: true, completion: nil)
-        
     }
     
   
@@ -96,52 +72,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         present(imagePicker4, animated: true, completion: nil)
     }
     
-    @IBAction func didTapViewLeftMenu(_ sender: Any) {
-        userChooseLeftView()
-    }
-    @IBAction func didTapViewCenterMenu(_ sender: Any) {
-        userChooseCenterView()
-    }
-    @IBAction func didTapViewRightMenu(_ sender: Any) {
-        userChooseRight()
+    @IBAction func BottomLeftButton(_ sender: Any) {
+        photoView.style = .left
     }
     
-// test
+    @IBAction func BottomCenterButton(_ sender: Any) {
+        photoView.style = .center
+    }
+    
+    @IBAction func BottomRightButton(_ sender: Any) {
+        photoView.style = .right
+    }
+    
 
-
-   
-// test
-    
-    func userChooseLeftView() {
-        TLView.isHidden = false
-        TRView.isHidden = true
-        BRView.isHidden = false
-        BLView.isHidden = false
-        bottomButtonLeft.alpha = 0.4
-        bottomButtonRight.alpha = 1
-        bottomButtonCenter.alpha = 1
-        
-        
-    }
-    
-    func userChooseCenterView() {
-        TLView.isHidden = false
-        TRView.isHidden = false
-        BRView.isHidden = true
-        BLView.isHidden = false
-        bottomButtonLeft.alpha = 1
-        bottomButtonRight.alpha = 1
-        bottomButtonCenter.alpha = 0.4
-    }
-    
-    func userChooseRight() {
-        TLView.isHidden = false
-        TRView.isHidden = false
-        BRView.isHidden = false
-        BLView.isHidden = false
-        bottomButtonLeft.alpha = 1
-        bottomButtonRight.alpha = 0.4
-        bottomButtonCenter.alpha = 1
-    }
 }
 
