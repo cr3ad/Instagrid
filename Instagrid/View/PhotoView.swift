@@ -11,12 +11,13 @@ import UIKit
 class PhotoView: UIView {
    
     @IBOutlet weak var MainTopLeftView: PhotoView!
-    @IBOutlet weak var MainTopRightView: PhotoView!
-    @IBOutlet weak var MainBottomLeftView: PhotoView!
-    @IBOutlet weak var MainBottomRightView: PhotoView!
-    @IBOutlet weak var BottomLeftImage: UIImageView!
-    @IBOutlet weak var BottomCenterImage: UIImageView!
-    @IBOutlet weak var BottomRightImage: UIImageView!
+    @IBOutlet weak var MainTopRightView: UIView!
+    @IBOutlet weak var MainBottomLeftView: UIView!
+    @IBOutlet weak var MainBottomRightView: UIView!
+    @IBOutlet weak var BottomLeftImage: UIView!
+    @IBOutlet weak var BottomCenterImage: UIView!
+    @IBOutlet weak var BottomRightImage: UIView!
+    
     
     
     enum Style {
@@ -29,7 +30,7 @@ class PhotoView: UIView {
         }
     }
     
-    private func setStyle(_ style: Style) {
+    func setStyle(_ style: Style) {
         switch style {
         case .left:
             MainTopLeftView.isHidden = false

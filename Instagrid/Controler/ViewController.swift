@@ -20,6 +20,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     var photoView = PhotoView()
+
+    
     let imagePicker1 = UIImagePickerController()
     let imagePicker2 = UIImagePickerController()
     let imagePicker3 = UIImagePickerController()

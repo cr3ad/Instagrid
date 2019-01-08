@@ -22,7 +22,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Instagrid" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="PhotoView" customModule="Instagrid" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -48,7 +48,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO" userLabel="mainView" customClass="PhotoView" customModule="Instagrid" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO" userLabel="mainView">
                                 <rect key="frame" x="20" y="261" width="374" height="374"/>
                                 <subviews>
                                     <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-aw-c0Z">
@@ -57,7 +57,7 @@
                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="q7y-vy-hWg" userLabel="Top Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="354" height="172"/>
                                                 <subviews>
-                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwg-s0-fnW" userLabel="TLView" customClass="PhotoView" customModule="Instagrid" customModuleProvider="target">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bwg-s0-fnW" userLabel="TLView">
                                                         <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72p-oI-tiP" userLabel="1BMVTL">
@@ -84,7 +84,7 @@
                                                             <constraint firstItem="72p-oI-tiP" firstAttribute="leading" secondItem="bwg-s0-fnW" secondAttribute="leading" id="uFj-sS-Yfp"/>
                                                         </constraints>
                                                     </view>
-                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHA-Vi-HNw" userLabel="TRView" customClass="PhotoView" customModule="Instagrid" customModuleProvider="target">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHA-Vi-HNw" userLabel="TRView">
                                                         <rect key="frame" x="182" y="0.0" width="172" height="172"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ItV-ac-G3H" userLabel="1BMVTR">
@@ -147,7 +147,7 @@
                                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bep-Rn-dUm" userLabel="Bottom Stack View">
                                                 <rect key="frame" x="0.0" y="182" width="354" height="172"/>
                                                 <subviews>
-                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7P-8g-mcB" userLabel="BLView" customClass="PhotoView" customModule="Instagrid" customModuleProvider="target">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7P-8g-mcB" userLabel="BLView">
                                                         <rect key="frame" x="0.0" y="0.0" width="172" height="172"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gue-sc-l4d" userLabel="1BMVTL">
@@ -174,7 +174,7 @@
                                                             <constraint firstItem="3Zh-oi-GDB" firstAttribute="top" secondItem="t7P-8g-mcB" secondAttribute="top" id="xnI-gX-1dW"/>
                                                         </constraints>
                                                     </view>
-                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5WO-Zi-dhP" userLabel="BRView" customClass="PhotoView" customModule="Instagrid" customModuleProvider="target">
+                                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5WO-Zi-dhP" userLabel="BRView">
                                                         <rect key="frame" x="182" y="0.0" width="172" height="172"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZU3-aV-43A" userLabel="1BMVBR">
@@ -532,13 +532,8 @@
                             </mask>
                         </variation>
                         <connections>
-                            <outlet property="BottomCenterImage" destination="AUl-9G-C1s" id="dbz-he-CfL"/>
                             <outlet property="BottomLeftImage" destination="6IY-c6-Jiy" id="inR-cI-b9C"/>
                             <outlet property="BottomRightImage" destination="AGm-Cb-VDN" id="TIn-PK-czD"/>
-                            <outlet property="MainBottomLeftView" destination="t7P-8g-mcB" id="Pgy-MC-3b2"/>
-                            <outlet property="MainBottomRightView" destination="5WO-Zi-dhP" id="zhn-Oi-rvo"/>
-                            <outlet property="MainTopLeftView" destination="IHA-Vi-HNw" id="0CF-Ca-59t"/>
-                            <outlet property="MainTopRightView" destination="IHA-Vi-HNw" id="TMM-yA-1fA"/>
                         </connections>
                     </view>
                     <connections>
