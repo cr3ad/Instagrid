@@ -25,8 +25,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var centerStyleImage: UIButton!
     @IBOutlet weak var rightStyleImage: UIButton!
     
-    
-    
     @IBAction func didTapViewLeftMenu(_ sender: Any) {
         model.setStyle = .left
         resetMainView()
@@ -51,16 +49,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any], sender: UIButton) {
         if (info[UIImagePickerController.InfoKey.editedImage] as? UIImage) != nil {
-            generateButton(onPosition: sender.tag).contentMode = .scaleAspectFit
-            //generateButton(onPosition: sender.tag).image(for: .normal) = imagePicker
+            generateButton(onPosition: sender.tag).imageView  // ??
+           
         }
         
         picker.dismiss(animated: true, completion: nil)
-        
         dismiss(animated: true, completion: nil)
+
     }
     
     
+    // comment acceder aux boutons?
+    // le modele comporte des Image? different de bouton? pourquoi ne pas creer des boutons dans les grilles?
     
     
     
@@ -69,8 +69,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     // button generation
     
-    let backgroundButtonImage = UIImage(imageLiteralResourceName: "blueCross")
-    
+    var backgroundButtonImage = UIImage(imageLiteralResourceName: "blueCross")
+
     func generateButton(onPosition: Int) -> UIButton {
         let myButton = UIButton()
         myButton.tag = onPosition
@@ -82,16 +82,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @objc func tapOnButton(sender:UIButton){
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         present(imagePicker, animated: true, completion: nil)
+        
     }
+    
+    
     
     func resetStackViews() {
         for view in mainViewTopStackView.subviews {
             view.removeFromSuperview()
         }
-        
         for view in mainViewBottomStackView.subviews {
             view.removeFromSuperview()
         }
@@ -100,14 +102,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func resetMainView() {
         resetStackViews()
         let mainView = model.arrayOfImages
-        
         let top = mainView[0]
         let bottom = mainView[1]
-        
         for image in top.enumerated() {
             mainViewTopStackView.addArrangedSubview(generateButton(onPosition: image.offset))
         }
-        
         for image in bottom.enumerated() {
             mainViewBottomStackView.addArrangedSubview(generateButton(onPosition: image.offset + top.count))
         }
