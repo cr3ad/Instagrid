@@ -23,11 +23,11 @@ class Model {
         case left, center, right
     }
 
-    var setStyle: Style = .left
+    var style: Style = .left
     var images = [UIImage(), UIImage(), UIImage(), UIImage()]
     
     var arrayOfImages: [[UIImage]] {
-        switch setStyle {
+        switch style {
         case .left:
             
             return [ [images[0]            ] ,
@@ -43,27 +43,5 @@ class Model {
         }
     }
     
-    
-    var setBottomStyle: BottomStyle = .left
-    var bottomStyle: UIButton {
-        switch setBottomStyle {
-
-        case .left:
-            view.leftStyleImage.alpha = 0.4
-            view.centerStyleImage.alpha = 1
-            view.rightStyleImage.alpha = 1
-            
-        case .center:
-            view.leftStyleImage.alpha = 1
-            view.centerStyleImage.alpha = 0.4
-            view.rightStyleImage.alpha = 1
-            
-        case .right:
-            view.leftStyleImage.alpha = 1
-            view.centerStyleImage.alpha = 1
-            view.rightStyleImage.alpha = 0.4
-            
-        }
-    }
 }
 

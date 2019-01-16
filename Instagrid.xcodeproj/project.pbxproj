@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		644781AF21EF288400E62A8C /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644781AE21EF288400E62A8C /* Notes.swift */; };
 		6460750421C663F300CF607D /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6460750321C663F300CF607D /* Model.swift */; };
 		64C1D26821C2574500D9AC10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C1D26721C2574500D9AC10 /* AppDelegate.swift */; };
 		64C1D26A21C2574500D9AC10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C1D26921C2574500D9AC10 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		644781AE21EF288400E62A8C /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		6460750321C663F300CF607D /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		6460750921C6646200CF607D /* Delm-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delm-Medium.otf"; sourceTree = "<group>"; };
 		6460750B21C6646800CF607D /* ThirstySoftRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThirstySoftRegular.otf; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				64C1D26921C2574500D9AC10 /* ViewController.swift */,
+				644781AE21EF288400E62A8C /* Notes.swift */,
 			);
 			path = Controler;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				6460750421C663F300CF607D /* Model.swift in Sources */,
 				64C1D26A21C2574500D9AC10 /* ViewController.swift in Sources */,
 				64C1D26821C2574500D9AC10 /* AppDelegate.swift in Sources */,
+				644781AF21EF288400E62A8C /* Notes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

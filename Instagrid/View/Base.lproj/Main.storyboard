@@ -234,12 +234,10 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdz-4c-ydr">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Selected" highlightedImage="Selected" translatesAutoresizingMaskIntoConstraints="NO" id="6IY-c6-Jiy" userLabel="1IMGSVL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
-                                                    </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbj-Sj-0HK" userLabel="1BSVL">
                                                         <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
-                                                        <state key="normal" image="Layout 1"/>
+                                                        <state key="normal" backgroundImage="Layout 1"/>
+                                                        <state key="selected" image="Selected" backgroundImage="Layout 1"/>
                                                         <connections>
                                                             <action selector="didTapViewLeftMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fza-fr-3Z0"/>
                                                         </connections>
@@ -248,13 +246,9 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="Mbj-Sj-0HK" firstAttribute="leading" secondItem="mdz-4c-ydr" secondAttribute="leading" id="8Vf-W3-JSd"/>
-                                                    <constraint firstAttribute="trailing" secondItem="6IY-c6-Jiy" secondAttribute="trailing" id="Rc0-XF-4xV"/>
                                                     <constraint firstItem="Mbj-Sj-0HK" firstAttribute="top" secondItem="mdz-4c-ydr" secondAttribute="top" id="Rzk-pk-wfD"/>
-                                                    <constraint firstAttribute="bottom" secondItem="6IY-c6-Jiy" secondAttribute="bottom" id="cP3-Hh-UEQ"/>
-                                                    <constraint firstItem="6IY-c6-Jiy" firstAttribute="top" secondItem="mdz-4c-ydr" secondAttribute="top" id="cpg-nP-Zlu"/>
                                                     <constraint firstAttribute="bottom" secondItem="Mbj-Sj-0HK" secondAttribute="bottom" id="cys-Ae-x7A"/>
                                                     <constraint firstAttribute="trailing" secondItem="Mbj-Sj-0HK" secondAttribute="trailing" id="doS-yE-Qhe"/>
-                                                    <constraint firstItem="6IY-c6-Jiy" firstAttribute="leading" secondItem="mdz-4c-ydr" secondAttribute="leading" id="hdj-fU-tEa"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -271,12 +265,10 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1L-hR-BZ2">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Selected" highlightedImage="Layout 2" translatesAutoresizingMaskIntoConstraints="NO" id="AUl-9G-C1s" userLabel="1IMGSVC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
-                                                    </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhO-kz-hKi" userLabel="1BSVC">
                                                         <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
-                                                        <state key="normal" image="Layout 2"/>
+                                                        <state key="normal" backgroundImage="Layout 2"/>
+                                                        <state key="selected" image="Selected" backgroundImage="Layout 2"/>
                                                         <connections>
                                                             <action selector="didTapViewCenterMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w69-QB-Chr"/>
                                                         </connections>
@@ -284,12 +276,8 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstItem="AUl-9G-C1s" firstAttribute="leading" secondItem="h1L-hR-BZ2" secondAttribute="leading" id="1Kn-8C-8hg"/>
                                                     <constraint firstAttribute="trailing" secondItem="RhO-kz-hKi" secondAttribute="trailing" id="36c-PE-HtF"/>
-                                                    <constraint firstAttribute="bottom" secondItem="AUl-9G-C1s" secondAttribute="bottom" id="Sbf-IE-XZ0"/>
-                                                    <constraint firstAttribute="trailing" secondItem="AUl-9G-C1s" secondAttribute="trailing" id="YES-81-ZcN"/>
                                                     <constraint firstAttribute="bottom" secondItem="RhO-kz-hKi" secondAttribute="bottom" id="aER-c4-FgM"/>
-                                                    <constraint firstItem="AUl-9G-C1s" firstAttribute="top" secondItem="h1L-hR-BZ2" secondAttribute="top" id="oED-92-5U6"/>
                                                     <constraint firstItem="RhO-kz-hKi" firstAttribute="leading" secondItem="h1L-hR-BZ2" secondAttribute="leading" id="v5g-6b-QYB"/>
                                                     <constraint firstItem="RhO-kz-hKi" firstAttribute="top" secondItem="h1L-hR-BZ2" secondAttribute="top" id="vLl-4K-dTm"/>
                                                 </constraints>
@@ -308,12 +296,10 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gy0-BF-rYk">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Selected" highlightedImage="Selected" translatesAutoresizingMaskIntoConstraints="NO" id="AGm-Cb-VDN" userLabel="1IMGSVR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
-                                                    </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVi-xT-ufo" userLabel="1BSVR">
                                                         <rect key="frame" x="0.0" y="0.0" width="87.333333333333329" height="86.666666666666671"/>
-                                                        <state key="normal" image="Layout 3"/>
+                                                        <state key="normal" backgroundImage="Layout 3"/>
+                                                        <state key="selected" image="Selected" backgroundImage="Layout 3"/>
                                                         <connections>
                                                             <action selector="didTapViewRightMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wxe-mr-yGb"/>
                                                         </connections>
@@ -321,14 +307,10 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="bottom" secondItem="AGm-Cb-VDN" secondAttribute="bottom" id="CzF-W0-c26"/>
                                                     <constraint firstAttribute="trailing" secondItem="OVi-xT-ufo" secondAttribute="trailing" id="PqO-bN-bU4"/>
                                                     <constraint firstItem="OVi-xT-ufo" firstAttribute="top" secondItem="Gy0-BF-rYk" secondAttribute="top" id="QRf-Uz-6jL"/>
-                                                    <constraint firstAttribute="trailing" secondItem="AGm-Cb-VDN" secondAttribute="trailing" id="RZK-nt-ZYu"/>
-                                                    <constraint firstItem="AGm-Cb-VDN" firstAttribute="top" secondItem="Gy0-BF-rYk" secondAttribute="top" id="UEP-1a-Y23"/>
                                                     <constraint firstItem="OVi-xT-ufo" firstAttribute="leading" secondItem="Gy0-BF-rYk" secondAttribute="leading" id="Zuh-zD-gkI"/>
                                                     <constraint firstAttribute="bottom" secondItem="OVi-xT-ufo" secondAttribute="bottom" id="bF9-Dk-MDa"/>
-                                                    <constraint firstItem="AGm-Cb-VDN" firstAttribute="leading" secondItem="Gy0-BF-rYk" secondAttribute="leading" id="dHM-55-tfe"/>
                                                 </constraints>
                                             </view>
                                         </subviews>

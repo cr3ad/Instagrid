@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let model = Model()
-    var imagePicker = UIImagePickerController()
+    let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +26,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var rightStyleImage: UIButton!
     
     @IBAction func didTapViewLeftMenu(_ sender: Any) {
-        model.setStyle = .left
+        applyBottomStyle()
+        model.style = .left
         resetMainView()
     }
     @IBAction func didTapViewCenterMenu(_ sender: Any) {
-
-        model.setStyle = .center
+        applyBottomStyle()
+        model.style = .center
         resetMainView()
     }
     @IBAction func didTapViewRightMenu(_ sender: Any) {
-
-        model.setStyle = .right
+        applyBottomStyle()
+        model.style = .right
         resetMainView()
     }
     
@@ -46,29 +47,28 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any], sender: UIButton) {
-        if (info[UIImagePickerController.InfoKey.editedImage] as? UIImage) != nil {
-            generateButton(onPosition: sender.tag).imageView  // ??
-           
+        if let userImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            
+            model.images[sender.tag] = userImage
+            resetMainView()
+            print(sender.tag)
         }
-        
         picker.dismiss(animated: true, completion: nil)
         dismiss(animated: true, completion: nil)
-
+    }
+    /*func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any], sender: UIButton) {
+        if let userImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            
+            model.images[sender.tag] = userImage
+            resetMainView()
+            print(sender.tag)
+        }
+        picker.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
-    
-    // comment acceder aux boutons?
-    // le modele comporte des Image? different de bouton? pourquoi ne pas creer des boutons dans les grilles?
-    
-    
-    
-    
-    
-    
-    // button generation
-    
+    */
     var backgroundButtonImage = UIImage(imageLiteralResourceName: "blueCross")
 
     func generateButton(onPosition: Int) -> UIButton {
@@ -82,10 +82,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @objc func tapOnButton(sender:UIButton){
-        imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        self.present(imagePicker, animated: true, completion: nil)
         present(imagePicker, animated: true, completion: nil)
-        
     }
     
     
@@ -110,10 +110,25 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         for image in bottom.enumerated() {
             mainViewBottomStackView.addArrangedSubview(generateButton(onPosition: image.offset + top.count))
         }
+        applyBottomStyle()
+    }
+    
+    func applyBottomStyle() {
+        resetBottomStyle()
+        switch model.style {
+        case .left:
+            leftStyleImage.isSelected = true
+        case .center:
+            centerStyleImage.isSelected = true
+        case .right:
+            rightStyleImage.isSelected = true
+        }
     }
 
-    
-    
-
+    func resetBottomStyle() {
+        leftStyleImage.isSelected = false
+        centerStyleImage.isSelected = false
+        rightStyleImage.isSelected = false
+    }
 }
 
