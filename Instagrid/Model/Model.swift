@@ -19,8 +19,9 @@ class Model {
     enum Style {
         case left, center, right
     }
-    enum BottomStyle {
-        case left, center, right
+
+    enum ViewStatut {
+        case incomplete, complete
     }
 
     var style: Style = .left
@@ -41,6 +42,19 @@ class Model {
             return [ [images[0], images[1] ] ,
                      [images[2], images[3] ] ]
         }
+    }
+    
+    var viewStatut: ViewStatut = .incomplete
+    var mainImageViewStatut: ViewStatut {
+    switch viewStatut {
+    case .incomplete:
+        break
+    case .complete:
+        break
+    default:
+        break
+    }
+        return viewStatut
     }
     
 }

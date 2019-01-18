@@ -199,6 +199,7 @@
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.015775226056575775" green="0.3959292471408844" blue="0.60368543863296509" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="zI1-aw-c0Z" secondAttribute="trailing" constant="10" id="6wJ-dk-7Yl"/>
                                     <constraint firstItem="zI1-aw-c0Z" firstAttribute="top" secondItem="3oA-mu-gHO" secondAttribute="top" constant="10" id="7XL-vI-bsO"/>
@@ -224,6 +225,9 @@
                                         <exclude reference="yBQ-pE-cEl"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="oUI-ar-p1k" appends="YES" id="Rcv-mu-Hzf"/>
+                                </connections>
                             </view>
                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="RdV-FU-7CU" userLabel="BottomView">
                                 <rect key="frame" x="60" y="755.33333333333337" width="294" height="86.666666666666629"/>
@@ -479,12 +483,18 @@
                     <connections>
                         <outlet property="centerStyleImage" destination="RhO-kz-hKi" id="zGn-Mx-614"/>
                         <outlet property="leftStyleImage" destination="Mbj-Sj-0HK" id="tFR-2g-4GM"/>
+                        <outlet property="mainPhotoView" destination="3oA-mu-gHO" id="1nx-zG-WPM"/>
                         <outlet property="mainViewBottomStackView" destination="bep-Rn-dUm" id="kRK-WO-Mhl"/>
                         <outlet property="mainViewTopStackView" destination="q7y-vy-hWg" id="ehH-KQ-etw"/>
                         <outlet property="rightStyleImage" destination="OVi-xT-ufo" id="KLR-K0-StP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="oUI-ar-p1k">
+                    <connections>
+                        <action selector="mainViewGesture:" destination="BYZ-38-t0r" id="oif-80-6Sx"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.28185907046478" y="132"/>
         </scene>
