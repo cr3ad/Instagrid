@@ -25,7 +25,10 @@ class Model {
     }
 
     var style: Style = .left
-    var images = [UIImage(), UIImage(), UIImage(), UIImage()]
+    var images = [UIImage(imageLiteralResourceName: "blueCross"),
+                  UIImage(imageLiteralResourceName: "blueCross"),
+                  UIImage(imageLiteralResourceName: "blueCross"),
+                  UIImage(imageLiteralResourceName: "blueCross")]
     
     var arrayOfImages: [[UIImage]] {
         switch style {
@@ -50,8 +53,6 @@ class Model {
     case .incomplete:
         break
     case .complete:
-        break
-    default:
         break
     }
         return viewStatut

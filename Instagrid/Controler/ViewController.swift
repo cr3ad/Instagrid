@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let model = Model()
-    let imagePicker = UIImagePickerController()
+    var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,29 +43,29 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         resetMainView()
     }
     
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true)
+    }
     
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any], sender: UIButton) {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let userImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             
-            model.images[sender.tag] = userImage
+            model.images[1] = userImage
             resetMainView()
-            print(sender.tag)
         }
         picker.dismiss(animated: true, completion: nil)
-        dismiss(animated: true, completion: nil)
+        
     }
     
     
     
     //Mark: Button generation
-    
-    var backgroundButtonImage = UIImage(imageLiteralResourceName: "blueCross")
 
     func generateButton(onPosition: Int) -> UIButton {
         let myButton = UIButton()
         myButton.tag = onPosition
-        myButton.setImage(backgroundButtonImage, for: .normal)
+        //myButton.setImage(backgroundButtonImage, for: .normal)
         myButton.backgroundColor = #colorLiteral(red: 0.9410743117, green: 0.9412353635, blue: 0.9410640597, alpha: 1)
         myButton.contentMode = .center
         myButton.addTarget(self, action: #selector(tapOnButton), for: .touchUpInside)
@@ -75,7 +75,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @objc func tapOnButton(sender:UIButton){
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
-        self.present(imagePicker, animated: true, completion: nil)
+        imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -125,11 +125,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     //Mark: View Modification
     
     @IBAction func mainViewGesture(_ sender: UIPanGestureRecognizer) {
-        
+      
         switch sender.state {
         case .began, .changed:
             transformPhotoView(gesture: sender)
-        case .ended, .cancelled:
+        case .ended where model.viewStatut == .complete,
+             .cancelled where model.viewStatut == .complete :
             sharePhoto()
         default:
             break
@@ -138,7 +139,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     private func transformPhotoView(gesture: UIPanGestureRecognizer) {
         
-        if model.viewStatut == .incomplete {
+        if model.viewStatut == .complete {
             
             let translation = gesture.translation(in: self.view)
             if let view = gesture.view {
@@ -146,11 +147,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                                       y: view.center.y + translation.y)
             }
             gesture.setTranslation(CGPoint.zero, in: self.view)
-        
-            sharePhoto()
-        } else {
+        }
             
-            shake()
+        if model.viewStatut == .incomplete {
+            
+            shakeIncomplete()
         }
     }
     
@@ -172,7 +173,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-    func shake() {
+        // in case photoGrid is incomplete
+    private func shakeIncomplete() {
         mainPhotoView.transform = CGAffineTransform(translationX: 0, y: 10)
         UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
             self.mainPhotoView.transform = CGAffineTransform.identity
