@@ -30,6 +30,7 @@ class Model {
                   UIImage(imageLiteralResourceName: "blueCross"),
                   UIImage(imageLiteralResourceName: "blueCross")]
     
+    
     var arrayOfImages: [[UIImage]] {
         switch style {
         case .left:

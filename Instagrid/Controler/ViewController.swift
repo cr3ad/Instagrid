@@ -12,12 +12,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     let model = Model()
     var imagePicker = UIImagePickerController()
+    var positionImageButton = -1
+    let backgroundImage = UIImage(imageLiteralResourceName: "blueCross")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
         resetMainView()
-        
     }
  
     @IBOutlet weak var mainPhotoView: UIView!
@@ -29,17 +30,29 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     @IBAction func didTapViewLeftMenu(_ sender: Any) {
         applyBottomStyle()
+        if model.style == .left {
+            resetImages()
+        } else {
         model.style = .left
+        }
         resetMainView()
     }
     @IBAction func didTapViewCenterMenu(_ sender: Any) {
         applyBottomStyle()
-        model.style = .center
+        if model.style == .center {
+            resetImages()
+        } else {
+            model.style = .center
+        }
         resetMainView()
     }
     @IBAction func didTapViewRightMenu(_ sender: Any) {
         applyBottomStyle()
-        model.style = .right
+        if model.style == .right {
+            resetImages()
+        } else {
+            model.style = .right
+        }
         resetMainView()
     }
     
@@ -47,27 +60,25 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.dismiss(animated: true)
     }
     
-
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let userImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-            
-            model.images[1] = userImage
+            model.images[positionImageButton] = userImage
+            positionImageButton = -1
             resetMainView()
         }
-        picker.dismiss(animated: true, completion: nil)
-        
+        dismiss(animated: true, completion: nil)
     }
-    
-    
-    
+
     //Mark: Button generation
 
-    func generateButton(onPosition: Int) -> UIButton {
+    func generateButton(onPosition: Int, image: UIImage) -> UIButton {
+        
         let myButton = UIButton()
         myButton.tag = onPosition
-        //myButton.setImage(backgroundButtonImage, for: .normal)
+        //myButton.contentMode = .scaleAspectFit
+        myButton.imageView?.contentMode = .scaleAspectFill
+        myButton.setImage(image, for: .normal)
         myButton.backgroundColor = #colorLiteral(red: 0.9410743117, green: 0.9412353635, blue: 0.9410640597, alpha: 1)
-        myButton.contentMode = .center
         myButton.addTarget(self, action: #selector(tapOnButton), for: .touchUpInside)
         return myButton
     }
@@ -76,10 +87,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
+        positionImageButton = sender.tag
         present(imagePicker, animated: true, completion: nil)
+        
     }
     
+    //Mark: Reset Views
     
+    func resetImages() {
+        for i in 0...model.images.count - 1 {
+            model.images[i] = backgroundImage
+        }
+    }
     
     func resetStackViews() {
         for view in mainViewTopStackView.subviews {
@@ -96,12 +115,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let top = mainView[0]
         let bottom = mainView[1]
         for image in top.enumerated() {
-            mainViewTopStackView.addArrangedSubview(generateButton(onPosition: image.offset))
+            mainViewTopStackView.addArrangedSubview(generateButton(onPosition: image.offset, image: image.element))
+            
         }
         for image in bottom.enumerated() {
-            mainViewBottomStackView.addArrangedSubview(generateButton(onPosition: image.offset + top.count))
+            mainViewBottomStackView.addArrangedSubview(generateButton(onPosition: image.offset + top.count, image: image.element))
         }
         applyBottomStyle()
+    }
+    
+    func resetBottomStyle() {
+        leftStyleImage.isSelected = false
+        centerStyleImage.isSelected = false
+        rightStyleImage.isSelected = false
     }
     
     func applyBottomStyle() {
@@ -115,46 +141,85 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             rightStyleImage.isSelected = true
         }
     }
-
-    func resetBottomStyle() {
-        leftStyleImage.isSelected = false
-        centerStyleImage.isSelected = false
-        rightStyleImage.isSelected = false
-    }
     
-    //Mark: View Modification
+    //Mark: Gesture
     
     @IBAction func mainViewGesture(_ sender: UIPanGestureRecognizer) {
       
         switch sender.state {
+
+            
         case .began, .changed:
-            transformPhotoView(gesture: sender)
-        case .ended where model.viewStatut == .complete,
-             .cancelled where model.viewStatut == .complete :
-            sharePhoto()
+            photoGridAnimationManager(gesture: sender)
+            
+            
+        case .cancelled, .ended:
+            backToOriginalPosition()
+            
+            
         default:
             break
         }
     }
     
-    private func transformPhotoView(gesture: UIPanGestureRecognizer) {
+    
+    // animate imageGrid
+    
+    private func photoGridAnimationManager(gesture: UIPanGestureRecognizer) {
+        shake()
+        let position = mainPhotoView.center.y
+        let translation = gesture.translation(in: self.view).y
         
-        if model.viewStatut == .complete {
-            
-            let translation = gesture.translation(in: self.view)
+        
+        if gridIsComplete() {
             if let view = gesture.view {
                 view.center = CGPoint(x: view.center.x ,
-                                      y: view.center.y + translation.y)
+                                      y: view.center.y + translation*2)
             }
+            
+            gesture.velocity(in: self.mainPhotoView)
             gesture.setTranslation(CGPoint.zero, in: self.view)
-        }
             
-        if model.viewStatut == .incomplete {
+            print(position)
+            if position <= 0 {
+                
+                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .transitionFlipFromTop, animations: {
+                    self.mainPhotoView.transform = CGAffineTransform(translationX: 0, y: -150)
+                }, completion: nil)
+                sharePhoto()
+                mainPhotoView.alpha = 0
+            }
             
-            shakeIncomplete()
+        } else {
+            print("shake")
+            shake()
         }
     }
     
+    private func backToOriginalPosition() {
+        let screenHeightCenter = UIScreen.main.bounds.height * 0.5
+        mainPhotoView.center.y = screenHeightCenter
+        mainPhotoView.alpha = 1
+        shake()
+    }
+    
+    
+    // check if the grid is complete
+    private func gridIsComplete() -> Bool {
+        var gridIsComplete = true
+        /**/
+        for images in model.arrayOfImages[0] {
+            if images == UIImage(imageLiteralResourceName: "blueCross") {
+                gridIsComplete = false
+            }
+        }
+        for images in model.arrayOfImages[1] {
+            if images == UIImage(imageLiteralResourceName: "blueCross") {
+                gridIsComplete = false
+            }
+        }/**/
+        return gridIsComplete
+    }
 
     private func sharePhoto() {
         
@@ -163,23 +228,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         mainPhotoView.layer.render(in:UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
- 
         // set up activity view controller
         let imageToShare = [ image ]
         let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-        
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
     }
     
-        // in case photoGrid is incomplete
-    private func shakeIncomplete() {
-        mainPhotoView.transform = CGAffineTransform(translationX: 0, y: 10)
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .curveEaseInOut, animations: {
-            self.mainPhotoView.transform = CGAffineTransform.identity
+    private func shake() {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.mainPhotoView.transform = CGAffineTransform(translationX: 0, y: 10)
         }, completion: nil)
     }
-        
+    
+    
+ 
     
 }
