@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina4_0" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -23,20 +23,20 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Instagrid" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RdV-FU-7CU" userLabel="BottomView">
-                                <rect key="frame" x="60" y="405" width="200" height="65"/>
+                                <rect key="frame" x="478" y="25" width="80" height="270.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Of9-i4-8RW" userLabel="Left Stack View">
-                                        <rect key="frame" x="0.0" y="0.0" width="63.5" height="65"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="83.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdz-4c-ydr">
-                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="65"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="83.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mbj-Sj-0HK" userLabel="1BSVL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="63.5" height="65"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="83.5"/>
                                                         <state key="normal" backgroundImage="Layout 1"/>
                                                         <state key="selected" image="Selected" backgroundImage="Layout 1"/>
                                                         <connections>
@@ -79,13 +79,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="udM-hc-8GD" userLabel="Center Stack View">
-                                        <rect key="frame" x="68.5" y="0.0" width="63" height="65"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="80" height="83.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1L-hR-BZ2">
-                                                <rect key="frame" x="0.0" y="0.0" width="63" height="65"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="83.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RhO-kz-hKi" userLabel="1BSVC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="63" height="65"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="83.5"/>
                                                         <state key="normal" backgroundImage="Layout 2"/>
                                                         <state key="selected" image="Selected" backgroundImage="Layout 2"/>
                                                         <connections>
@@ -128,13 +128,13 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1zj-Ke-ccj" userLabel="Right Stack View">
-                                        <rect key="frame" x="136.5" y="0.0" width="63.5" height="65"/>
+                                        <rect key="frame" x="0.0" y="187" width="80" height="83.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gy0-BF-rYk">
-                                                <rect key="frame" x="0.0" y="0.0" width="63.5" height="65"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="83.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVi-xT-ufo" userLabel="1BSVR">
-                                                        <rect key="frame" x="0.0" y="0.0" width="63.5" height="65"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="83.5"/>
                                                         <state key="normal" backgroundImage="Layout 3"/>
                                                         <state key="selected" image="Selected" backgroundImage="Layout 3"/>
                                                         <connections>
@@ -193,17 +193,17 @@
                                     </mask>
                                 </variation>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO" userLabel="imageGrid">
-                                <rect key="frame" x="55" y="135" width="210" height="210"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO" userLabel="mainPhotoGrid">
+                                <rect key="frame" x="157.5" y="47" width="253" height="253"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-aw-c0Z">
-                                        <rect key="frame" x="10" y="10" width="190" height="190"/>
+                                        <rect key="frame" x="10" y="10" width="233" height="233"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="q7y-vy-hWg" userLabel="Top Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="190" height="90"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="233" height="111.5"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="bep-Rn-dUm" userLabel="Bottom Stack View">
-                                                <rect key="frame" x="0.0" y="100" width="190" height="90"/>
+                                                <rect key="frame" x="0.0" y="121.5" width="233" height="111.5"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -251,14 +251,14 @@
                                     <outletCollection property="gestureRecognizers" destination="oUI-ar-p1k" appends="YES" id="Rcv-mu-Hzf"/>
                                 </connections>
                             </view>
-                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagrid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="21" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-2G-8Pa" userLabel="appName">
-                                <rect key="frame" x="79" y="25" width="162" height="45"/>
+                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagrid" textAlignment="center" lineBreakMode="wordWrap" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-2G-8Pa" userLabel="appName">
+                                <rect key="frame" x="205" y="10" width="158" height="27"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="aTf-2G-8Pa" secondAttribute="height" multiplier="300:50" id="6XF-6B-dxE"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="aTf-2G-8Pa" secondAttribute="height" multiplier="18:6" id="6XF-6B-dxE"/>
                                     <constraint firstAttribute="width" secondItem="aTf-2G-8Pa" secondAttribute="height" multiplier="175:53" id="Fpj-1k-XCf"/>
-                                    <constraint firstAttribute="width" secondItem="aTf-2G-8Pa" secondAttribute="height" multiplier="18:5" id="JTb-Yb-fVN"/>
+                                    <constraint firstAttribute="width" secondItem="aTf-2G-8Pa" secondAttribute="height" multiplier="18:6" id="JTb-Yb-fVN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ThirstySoftRegular" family="Thirsty Soft" pointSize="41"/>
+                                <fontDescription key="fontDescription" name="ThirstySoftRegular" family="Thirsty Soft" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
@@ -275,8 +275,8 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="^ Swipe up to  share" textAlignment="center" lineBreakMode="clip" numberOfLines="3" minimumFontSize="16" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ul3-lh-TVk" userLabel="share">
-                                <rect key="frame" x="92.5" y="75" width="135" height="55"/>
+                            <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="^ Swipe up to  share" textAlignment="center" lineBreakMode="clip" numberOfLines="3" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ul3-lh-TVk" userLabel="share">
+                                <rect key="frame" x="10" y="131" width="137.5" height="58"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ul3-lh-TVk" secondAttribute="height" multiplier="157:66" id="wtd-li-WNt"/>
                                 </constraints>
@@ -305,7 +305,6 @@
                                 <variation key="heightClass=compact" constant="20"/>
                             </constraint>
                             <constraint firstItem="aTf-2G-8Pa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5gj-yR-G1c"/>
-                            <constraint firstItem="3oA-mu-gHO" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6OV-Gi-o1p"/>
                             <constraint firstItem="RdV-FU-7CU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="6kS-WI-UyR"/>
                             <constraint firstAttribute="bottom" secondItem="3oA-mu-gHO" secondAttribute="bottom" constant="20" id="6kT-OQ-jpM"/>
                             <constraint firstItem="aTf-2G-8Pa" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="8yv-RL-ce7"/>
@@ -327,7 +326,6 @@
                             </constraint>
                             <constraint firstItem="3oA-mu-gHO" firstAttribute="top" secondItem="ul3-lh-TVk" secondAttribute="bottom" constant="5" id="JOJ-3u-eKR"/>
                             <constraint firstItem="RdV-FU-7CU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LYH-SB-Fzt"/>
-                            <constraint firstItem="ul3-lh-TVk" firstAttribute="top" secondItem="aTf-2G-8Pa" secondAttribute="bottom" constant="5" id="Nfj-6u-KBu"/>
                             <constraint firstItem="RdV-FU-7CU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3oA-mu-gHO" secondAttribute="trailing" constant="10" id="OK3-hT-wxN">
                                 <variation key="heightClass=compact" constant="20"/>
                             </constraint>
@@ -368,13 +366,14 @@
                                 <exclude reference="Ulo-Xf-Pzm"/>
                                 <exclude reference="bl2-gO-e6j"/>
                                 <exclude reference="mfp-bM-2Ub"/>
+                                <exclude reference="5gj-yR-G1c"/>
+                                <exclude reference="TV8-pi-vG6"/>
                                 <exclude reference="DoC-RL-48f"/>
                                 <exclude reference="FiI-p8-n1S"/>
                                 <exclude reference="VHG-qd-LaV"/>
                                 <exclude reference="dZC-Hh-RMz"/>
                                 <exclude reference="kyE-co-jYz"/>
                                 <exclude reference="23m-aA-Ig7"/>
-                                <exclude reference="6OV-Gi-o1p"/>
                                 <exclude reference="6kT-OQ-jpM"/>
                                 <exclude reference="BYX-KA-nuw"/>
                                 <exclude reference="Hhc-Ci-Y37"/>
@@ -384,8 +383,6 @@
                                 <exclude reference="caE-zo-rFE"/>
                                 <exclude reference="jYz-Nr-6OZ"/>
                                 <exclude reference="o7z-QQ-cdP"/>
-                                <exclude reference="5gj-yR-G1c"/>
-                                <exclude reference="TV8-pi-vG6"/>
                                 <exclude reference="1bo-bW-grW"/>
                                 <exclude reference="4ya-d6-oqk"/>
                                 <exclude reference="6kS-WI-UyR"/>
@@ -403,18 +400,21 @@
                                 <include reference="mfp-bM-2Ub"/>
                                 <exclude reference="pSj-J0-7Sr"/>
                                 <exclude reference="vEJ-3y-w2V"/>
+                                <include reference="5gj-yR-G1c"/>
+                                <exclude reference="8yv-RL-ce7"/>
+                                <exclude reference="AKB-x5-o1M"/>
+                                <include reference="TV8-pi-vG6"/>
+                                <exclude reference="u1d-ey-k5c"/>
                                 <include reference="DoC-RL-48f"/>
                                 <exclude reference="EJ4-fK-inl"/>
                                 <exclude reference="FiI-p8-n1S"/>
                                 <exclude reference="IiC-ef-u3r"/>
-                                <exclude reference="Nfj-6u-KBu"/>
                                 <include reference="VHG-qd-LaV"/>
                                 <exclude reference="Zov-5i-mmV"/>
                                 <exclude reference="dZC-Hh-RMz"/>
                                 <exclude reference="gJg-zV-WnE"/>
                                 <include reference="kyE-co-jYz"/>
                                 <exclude reference="23m-aA-Ig7"/>
-                                <exclude reference="6OV-Gi-o1p"/>
                                 <include reference="6kT-OQ-jpM"/>
                                 <include reference="BYX-KA-nuw"/>
                                 <exclude reference="Hhc-Ci-Y37"/>
@@ -428,11 +428,6 @@
                                 <exclude reference="caE-zo-rFE"/>
                                 <include reference="jYz-Nr-6OZ"/>
                                 <include reference="o7z-QQ-cdP"/>
-                                <include reference="5gj-yR-G1c"/>
-                                <exclude reference="8yv-RL-ce7"/>
-                                <exclude reference="AKB-x5-o1M"/>
-                                <include reference="TV8-pi-vG6"/>
-                                <exclude reference="u1d-ey-k5c"/>
                                 <exclude reference="1bo-bW-grW"/>
                                 <include reference="4ya-d6-oqk"/>
                                 <include reference="6kS-WI-UyR"/>
@@ -449,16 +444,17 @@
                     <connections>
                         <outlet property="centerStyleImage" destination="RhO-kz-hKi" id="zGn-Mx-614"/>
                         <outlet property="leftStyleImage" destination="Mbj-Sj-0HK" id="tFR-2g-4GM"/>
-                        <outlet property="mainPhotoView" destination="3oA-mu-gHO" id="1nx-zG-WPM"/>
+                        <outlet property="mainPhotoGrid" destination="3oA-mu-gHO" id="iYH-OW-GyK"/>
                         <outlet property="mainViewBottomStackView" destination="bep-Rn-dUm" id="kRK-WO-Mhl"/>
                         <outlet property="mainViewTopStackView" destination="q7y-vy-hWg" id="ehH-KQ-etw"/>
                         <outlet property="rightStyleImage" destination="OVi-xT-ufo" id="KLR-K0-StP"/>
+                        <outlet property="swipeToShare" destination="ul3-lh-TVk" id="cK2-oM-tMd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="oUI-ar-p1k">
                     <connections>
-                        <action selector="mainViewGesture:" destination="BYZ-38-t0r" id="oif-80-6Sx"/>
+                        <action selector="photoGridManager:" destination="BYZ-38-t0r" id="TS2-SP-F1g"/>
                     </connections>
                 </panGestureRecognizer>
             </objects>

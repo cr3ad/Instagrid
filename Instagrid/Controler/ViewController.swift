@@ -14,20 +14,46 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     var imagePicker = UIImagePickerController()
     var positionImageButton = -1
     let backgroundImage = UIImage(imageLiteralResourceName: "blueCross")
+    var deviceOrientation: UIDeviceOrientation {
+        let orientation = UIDevice.current.orientation
+        return orientation
+    }
+    var origineCenteViewWidth: CGFloat {
+        let width = UIScreen.main.bounds.width / 2
+        return width
+    }
+    var origineCenterViewHeight: CGFloat {
+        let height = UIScreen.main.bounds.height / 2
+        return height
+    }
+//    var textSwipeToShare: UILabel {
+//        if deviceOrientation == .portrait {
+//            return self.swipeToShare.text = " ^ Swipe up to share"
+//        } else if deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight {
+//            return self.swipeToShare.text = " < Swipe left to share"
+//        }
+//    }
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
         resetMainView()
+        print("view center  \(mainPhotoGrid.center)")
+
+        
     }
  
-    @IBOutlet weak var mainPhotoView: UIView!
+    // Interface connection //
+    
+    @IBOutlet weak var mainPhotoGrid: UIView!
     @IBOutlet weak var mainViewTopStackView: UIStackView!
     @IBOutlet weak var mainViewBottomStackView: UIStackView!
     @IBOutlet weak var leftStyleImage: UIButton!
     @IBOutlet weak var centerStyleImage: UIButton!
     @IBOutlet weak var rightStyleImage: UIButton!
-    
+    @IBOutlet weak var swipeToShare: UILabel!
     @IBAction func didTapViewLeftMenu(_ sender: Any) {
         applyBottomStyle()
         if model.style == .left {
@@ -55,6 +81,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
         resetMainView()
     }
+    @IBAction func photoGridManager(_ sender: UIPanGestureRecognizer) {
+        
+        switch sender.state {
+        case .began, .changed:
+            photoGridAnimationManager(gesture: sender)
+        case .cancelled, .ended:
+            resetGridPosition()
+        default:
+            break
+        }
+    }
+    
+    // Image picker //
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
@@ -69,13 +108,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         dismiss(animated: true, completion: nil)
     }
 
-    //Mark: Button generation
-
+    // PhotoGrid's button creation
     func generateButton(onPosition: Int, image: UIImage) -> UIButton {
-        
         let myButton = UIButton()
         myButton.tag = onPosition
-        //myButton.contentMode = .scaleAspectFit
         myButton.imageView?.contentMode = .scaleAspectFill
         myButton.setImage(image, for: .normal)
         myButton.backgroundColor = #colorLiteral(red: 0.9410743117, green: 0.9412353635, blue: 0.9410640597, alpha: 1)
@@ -94,12 +130,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     //Mark: Reset Views
     
+    // remove the photos to put back the background image
     func resetImages() {
         for i in 0...model.images.count - 1 {
             model.images[i] = backgroundImage
         }
     }
     
+    // remove the buttons
     func resetStackViews() {
         for view in mainViewTopStackView.subviews {
             view.removeFromSuperview()
@@ -109,6 +147,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
     }
     
+    // create the main view
     func resetMainView() {
         resetStackViews()
         let mainView = model.arrayOfImages
@@ -124,12 +163,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         applyBottomStyle()
     }
     
-    func resetBottomStyle() {
-        leftStyleImage.isSelected = false
-        centerStyleImage.isSelected = false
-        rightStyleImage.isSelected = false
-    }
-    
+    // show the selection of the bottom button
     func applyBottomStyle() {
         resetBottomStyle()
         switch model.style {
@@ -142,72 +176,78 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
     }
     
-    //Mark: Gesture
+    // remove the selection mark on the bottom buttons
+    func resetBottomStyle() {
+        leftStyleImage.isSelected = false
+        centerStyleImage.isSelected = false
+        rightStyleImage.isSelected = false
+    }
     
-    @IBAction func mainViewGesture(_ sender: UIPanGestureRecognizer) {
+    // animation manager
+    func photoGridAnimationManager(gesture: UIPanGestureRecognizer) {
       
-        switch sender.state {
-
-            
-        case .began, .changed:
-            photoGridAnimationManager(gesture: sender)
-            
-            
-        case .cancelled, .ended:
-            backToOriginalPosition()
-            
-            
-        default:
-            break
-        }
-    }
-    
-    
-    // animate imageGrid
-    
-    private func photoGridAnimationManager(gesture: UIPanGestureRecognizer) {
-        shake()
-        let position = mainPhotoView.center.y
-        let translation = gesture.translation(in: self.view).y
-        
-        
         if gridIsComplete() {
-            if let view = gesture.view {
-                view.center = CGPoint(x: view.center.x ,
-                                      y: view.center.y + translation*2)
-            }
-            
-            gesture.velocity(in: self.mainPhotoView)
-            gesture.setTranslation(CGPoint.zero, in: self.view)
-            
-            print(position)
-            if position <= 0 {
+            if deviceOrientation == .portrait {
+                let position = mainPhotoGrid.center.y
+                let translation = gesture.translation(in: self.view).y
+                if let view = gesture.view {
+                        view.center = CGPoint(x: view.center.x , y: view.center.y + translation*2)
+                }
                 
-                UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .transitionFlipFromTop, animations: {
-                    self.mainPhotoView.transform = CGAffineTransform(translationX: 0, y: -150)
-                }, completion: nil)
-                sharePhoto()
-                mainPhotoView.alpha = 0
+                gesture.velocity(in: self.mainPhotoGrid)
+                gesture.setTranslation(CGPoint.zero, in: self.view)
+                
+                if position <= 0 {
+                    UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .transitionFlipFromTop, animations: {
+                            self.mainPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -150)
+                        }, completion: nil)
+                    mainPhotoGrid.alpha = 0
+                    sharePhotoGrid()
+                    resetGridPosition()
+                }
+            } else if deviceOrientation == .landscapeRight || deviceOrientation == .landscapeLeft {
+                let position = mainPhotoGrid.center.x
+                let translation = gesture.translation(in: self.view).x
+                if let view = gesture.view {
+                    view.center = CGPoint(x: view.center.x  + translation*2 , y: view.center.y)
+                }
+                
+                gesture.velocity(in: self.mainPhotoGrid)
+                gesture.setTranslation(CGPoint.zero, in: self.view)
+                
+                if position <= 0 {
+                    UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .transitionFlipFromTop, animations: {
+                            self.mainPhotoGrid.transform = CGAffineTransform(translationX: -150, y: 0)
+                        }, completion: nil)
+                    mainPhotoGrid.alpha = 0
+                    sharePhotoGrid()
+                    resetGridPosition()
+                }
             }
-            
         } else {
-            print("shake")
             shake()
+            resetGridPosition()
+            
         }
     }
     
-    private func backToOriginalPosition() {
-        let screenHeightCenter = UIScreen.main.bounds.height * 0.5
-        mainPhotoView.center.y = screenHeightCenter
-        mainPhotoView.alpha = 1
-        shake()
+
+// put the photoGrid view in the center of the screen
+    func resetGridPosition() {
+        UIView.animate(withDuration: 0.1,
+                                   delay: 0,
+                                   options: .curveEaseOut,
+                                   animations: { self.mainPhotoGrid.transform = .identity },
+                                   completion: nil)
+        resetMainView()
     }
     
     
-    // check if the grid is complete
+    
+    
+// check if the grid is complete
     private func gridIsComplete() -> Bool {
         var gridIsComplete = true
-        /**/
         for images in model.arrayOfImages[0] {
             if images == UIImage(imageLiteralResourceName: "blueCross") {
                 gridIsComplete = false
@@ -217,30 +257,38 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             if images == UIImage(imageLiteralResourceName: "blueCross") {
                 gridIsComplete = false
             }
-        }/**/
+        }
         return gridIsComplete
     }
+    
+//    Shake the view
+    private func shake() {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.mainPhotoGrid.transform = CGAffineTransform(translationX: 0, y: 10)
+        }, completion: nil)
+        resetGridPosition()
+    }
 
-    private func sharePhoto() {
+//    share photoGrid
+    func sharePhotoGrid() {
         
         // renderer UIView to UIImage
-        UIGraphicsBeginImageContext(mainPhotoView.frame.size)
-        mainPhotoView.layer.render(in:UIGraphicsGetCurrentContext()!)
+        UIGraphicsBeginImageContext(mainPhotoGrid.frame.size)
+        mainPhotoGrid.layer.render(in:UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         // set up activity view controller
         let imageToShare = [ image ]
         let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
+        self.mainPhotoGrid.alpha = 1
     }
     
-    private func shake() {
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.mainPhotoView.transform = CGAffineTransform(translationX: 0, y: 10)
-        }, completion: nil)
-    }
+
     
     
  
