@@ -179,9 +179,8 @@
                                     </mask>
                                 </variation>
                             </stackView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO" userLabel="mainPhotoGrid">
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO" userLabel="mainPhotoGrid">
                                 <rect key="frame" x="305.66666666666669" y="70" width="324.00000000000006" height="324"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-aw-c0Z">
                                         <rect key="frame" x="10" y="10" width="327" height="328"/>
@@ -302,7 +301,33 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.71360510587692261" green="0.84258151054382324" blue="0.90132403373718262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ul3-lh-TVk" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="aY3-0o-QFB">
+                                <variation key="heightClass=compact" constant="100"/>
+                            </constraint>
+                            <constraint firstItem="3oA-mu-gHO" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ul3-lh-TVk" secondAttribute="trailing" constant="10" id="gKz-4P-fOy">
+                                <variation key="heightClass=compact" constant="100"/>
+                            </constraint>
+                            <constraint firstItem="ul3-lh-TVk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="gR4-50-9zL"/>
+                            <constraint firstItem="3oA-mu-gHO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ul3-lh-TVk" secondAttribute="trailing" constant="10" id="nnF-sN-am8"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="aY3-0o-QFB"/>
+                                <exclude reference="gR4-50-9zL"/>
+                                <exclude reference="gKz-4P-fOy"/>
+                                <exclude reference="nnF-sN-am8"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="aY3-0o-QFB"/>
+                                <include reference="gR4-50-9zL"/>
+                                <include reference="gKz-4P-fOy"/>
+                                <include reference="nnF-sN-am8"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="centerStyleImage" destination="RhO-kz-hKi" id="zGn-Mx-614"/>
