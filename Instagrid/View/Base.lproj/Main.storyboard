@@ -305,9 +305,6 @@
                         <color key="backgroundColor" red="0.71360510587692261" green="0.84258151054382324" blue="0.90132403373718262" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="3oA-mu-gHO" firstAttribute="top" secondItem="aTf-2G-8Pa" secondAttribute="bottom" constant="10" id="1Pq-bv-1YB"/>
-                            <constraint firstItem="RdV-FU-7CU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3oA-mu-gHO" secondAttribute="trailing" constant="162.33000000000001" id="5F6-7M-aA5">
-                                <variation key="heightClass=compact" constant="30"/>
-                            </constraint>
                             <constraint firstItem="RdV-FU-7CU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="5Ps-Uk-GVf">
                                 <variation key="heightClass=compact" constant="30"/>
                             </constraint>
@@ -346,7 +343,6 @@
                                 <exclude reference="IN5-3P-CB8"/>
                                 <exclude reference="1Pq-bv-1YB"/>
                                 <exclude reference="So8-ih-Tjd"/>
-                                <exclude reference="5F6-7M-aA5"/>
                                 <exclude reference="5Ps-Uk-GVf"/>
                                 <exclude reference="9Db-dw-FOI"/>
                                 <exclude reference="JQ6-rA-Vlp"/>
@@ -373,7 +369,6 @@
                                 <include reference="X6h-Rm-2Id"/>
                                 <include reference="TBq-sD-8EW"/>
                                 <include reference="aHH-H2-dX8"/>
-                                <include reference="5F6-7M-aA5"/>
                                 <include reference="5Ps-Uk-GVf"/>
                                 <exclude reference="9Db-dw-FOI"/>
                                 <exclude reference="JQ6-rA-Vlp"/>
