@@ -26,13 +26,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let height = UIScreen.main.bounds.height / 2
         return height
     }
-//    var textSwipeToShare: UILabel {
-//        if deviceOrientation == .portrait {
-//            return self.swipeToShare.text = " ^ Swipe up to share"
-//        } else if deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight {
-//            return self.swipeToShare.text = " < Swipe left to share"
-//        }
-//    }
+    
+    var textSwipeToShare: UILabel {
+        if deviceOrientation == .portrait {
+            return self.swipeToShare.text = " ^ Swipe up to share"
+        } else if deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight {
+            return self.swipeToShare.text = " < Swipe left to share"
+        }
+    }
 
 
     
