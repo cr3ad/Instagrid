@@ -27,22 +27,27 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         return height
     }
     
-    var textSwipeToShare: UILabel {
-        if deviceOrientation == .portrait {
-            return self.swipeToShare.text = " ^ Swipe up to share"
-        } else if deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight {
-            return self.swipeToShare.text = " < Swipe left to share"
-        }
-    }
-
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
         createMainView()
         
     }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        setTextSwipeToShare()
+    }
+    
+    func setTextSwipeToShare() {
+        if deviceOrientation == .portrait {
+            self.swipeToShare.text = " ^ \n Swipe up \n to share"
+        } else if deviceOrientation == .landscapeLeft || deviceOrientation == .landscapeRight {
+            self.swipeToShare.text = " < \n Swipe left \n to share"
+        }
+    }
+
+
  
     // Interface connection //
     
@@ -196,16 +201,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     // check if the grid is complete
     private func gridIsComplete() -> Bool {
         var gridIsComplete = true
-        //        for images in model.arrayOfImages[0] {
-        //            if images == UIImage(imageLiteralResourceName: "blueCross") {
-        //                gridIsComplete = false
-        //            }
-        //        }
-        //        for images in model.arrayOfImages[1] {
-        //            if images == UIImage(imageLiteralResourceName: "blueCross") {
-        //                gridIsComplete = false
-        //            }
-        //        }
+//                for images in model.arrayOfImages[0] {
+//                    if images == UIImage(imageLiteralResourceName: "blueCross") {
+//                        gridIsComplete = false
+//                    }
+//                }
+//                for images in model.arrayOfImages[1] {
+//                    if images == UIImage(imageLiteralResourceName: "blueCross") {
+//                        gridIsComplete = false
+//                    }
+//                }
         return gridIsComplete
     }
     
@@ -222,6 +227,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         // renderer UIView to UIImage
         UIGraphicsBeginImageContext(mainPhotoGrid.frame.size)
+        //UIGraphicsBeginImageContextWithOptions(<#T##size: CGSize##CGSize#>, <#T##opaque: Bool##Bool#>, <#T##scale: CGFloat##CGFloat#>)
         mainPhotoGrid.layer.render(in:UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -238,15 +244,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     // animation manager
     func photoGridAnimationManager(gesture: UIPanGestureRecognizer) {
-      
         if gridIsComplete() {
             if deviceOrientation == .portrait {
                 let position = mainPhotoGrid.center.y
                 let translation = gesture.translation(in: self.view).y
-                if let view = gesture.view {
-                        view.center = CGPoint(x: view.center.x , y: view.center.y + translation*2)
-                }
                 
+               
+                
+                if let view = gesture.view {
+                    if translation > 0 {
+                        view.center = CGPoint(x: view.center.x , y: view.center.y)
+                    } else {
+                        view.center = CGPoint(x: view.center.x , y: view.center.y + translation*2)
+                    }
+                }
                 gesture.velocity(in: self.mainPhotoGrid)
                 gesture.setTranslation(CGPoint.zero, in: self.view)
                 
@@ -263,7 +274,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                 let position = mainPhotoGrid.center.x
                 let translation = gesture.translation(in: self.view).x
                 if let view = gesture.view {
-                    view.center = CGPoint(x: view.center.x  + translation*2 , y: view.center.y)
+                    if translation > 0 {
+                        view.center = CGPoint(x: view.center.x , y: view.center.y)
+                    } else {
+                        view.center = CGPoint(x: view.center.x + translation*2 , y: view.center.y)
+                    }
                 }
                 
                 gesture.velocity(in: self.mainPhotoGrid)
