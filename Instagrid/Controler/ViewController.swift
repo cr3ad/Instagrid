@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -38,7 +39,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         super.viewWillTransition(to: size, with: coordinator)
         setTextSwipeToShare()
     }
-    
+
     func setTextSwipeToShare() {
         if deviceOrientation == .portrait {
             self.swipeToShare.text = " ^ \n Swipe up \n to share"
@@ -46,9 +47,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             self.swipeToShare.text = " < \n Swipe left \n to share"
         }
     }
-
-
- 
     // Interface connection //
     
     @IBOutlet weak var mainPhotoGrid: UIView!
@@ -97,8 +95,64 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
     }
     
-    // Image picker //
     
+    func haveAccessToPhotos() -> Bool {
+   // Get the current authorization state.
+        let status = PHPhotoLibrary.authorizationStatus()
+        var  accessPhotoAutorized = false
+        
+        
+        switch status {
+        case .notDetermined, .denied:
+            PHPhotoLibrary.requestAuthorization({status in
+                if status == .authorized{
+                    accessPhotoAutorized = true
+                } else {
+                    
+                    let alertController = UIAlertController(title: "Photo Library access denied",
+                                                            message:  "You have denied access to photo library, activate it in the setting to use it",
+                                                            preferredStyle: .alert)
+                    let settingsAction = UIAlertAction(title: "Go to Setting",
+                                                       style: .default) { (_) -> Void in
+                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                            return
+                        }
+                        
+                        if UIApplication.shared.canOpenURL(settingsUrl) {
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                                // Checking for setting is opened or not
+                                print("Setting is opened: \(success)")
+                            })
+                        }
+                    }
+                    alertController.addAction(settingsAction)
+                    // Cancel button action
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .default){ (_) -> Void in
+                        // Magic is here for cancel button
+                    }
+                    alertController.addAction(cancelAction)
+                    // This part is important to show the alert controller ( You may delete "self." from present )
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            })
+        case .restricted:
+            let alertRestricted = UIAlertController(title: "Photo Library access restricted",
+                                                    message: "You can not grant access to photo Library on this device",
+                                                    preferredStyle: .alert)
+            alertRestricted.addAction(UIAlertAction(title: NSLocalizedString("OK",
+                                                    comment: "Default action"),
+                                                    style: .default,
+                                                    handler: { _ in
+                                                        NSLog("The \"OK\" alert occured.")
+                                                    }))
+            self.present(alertRestricted, animated: true)
+        case .authorized:
+            accessPhotoAutorized = true
+        }
+        return accessPhotoAutorized
+    }
+
+    // Image picker //
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
     }
@@ -124,12 +178,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     }
     
     @objc func tapOnButton(sender:UIButton){
+        
+        if haveAccessToPhotos() == true {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         positionImageButton = sender.tag
         present(imagePicker, animated: true, completion: nil)
-        
+        }
     }
     
     //Mark: Reset Views
@@ -159,7 +215,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let bottom = mainView[1]
         for image in top.enumerated() {
             mainViewTopStackView.addArrangedSubview(generateButton(onPosition: image.offset, image: image.element))
-            
         }
         for image in bottom.enumerated() {
             mainViewBottomStackView.addArrangedSubview(generateButton(onPosition: image.offset + top.count, image: image.element))
@@ -175,7 +230,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                        animations: { self.mainPhotoGrid.transform = .identity },
                        completion: nil)
         createMainView()
-        mainPhotoGrid.alpha = 1
     }
     
     // show the selection of the bottom button
@@ -201,33 +255,38 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     // check if the grid is complete
     private func gridIsComplete() -> Bool {
         var gridIsComplete = true
-//                for images in model.arrayOfImages[0] {
-//                    if images == UIImage(imageLiteralResourceName: "blueCross") {
-//                        gridIsComplete = false
-//                    }
-//                }
-//                for images in model.arrayOfImages[1] {
-//                    if images == UIImage(imageLiteralResourceName: "blueCross") {
-//                        gridIsComplete = false
-//                    }
-//                }
+                for images in model.arrayOfImages[0] {
+                    if images == UIImage(imageLiteralResourceName: "blueCross") {
+                        gridIsComplete = false
+                    }
+                }
+                for images in model.arrayOfImages[1] {
+                    if images == UIImage(imageLiteralResourceName: "blueCross") {
+                        gridIsComplete = false
+                    }
+                }
         return gridIsComplete
     }
     
     //    Shake the view
     private func shake() {
-        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.mainPhotoGrid.transform = CGAffineTransform(translationX: 0, y: 10)
-        }, completion: nil)
+        UIView.animate(withDuration: 0.4,
+                       delay: 0,
+                       usingSpringWithDamping: 0.2,
+                       initialSpringVelocity: 1,
+                       options: .curveEaseOut,
+                       animations: {
+                        self.mainPhotoGrid.transform = CGAffineTransform(translationX: 0, y: 10)
+                        },
+                       completion: nil)
         resetGridPosition()
     }
     
     //    share photoGrid
     func sharePhotoGrid() {
-        
         // renderer UIView to UIImage
         UIGraphicsBeginImageContext(mainPhotoGrid.frame.size)
-        //UIGraphicsBeginImageContextWithOptions(<#T##size: CGSize##CGSize#>, <#T##opaque: Bool##Bool#>, <#T##scale: CGFloat##CGFloat#>)
+        //UIGraphicsBeginImageContextWithOptions(CGSize(width: 1000, height: 1000), true, 1.0)
         mainPhotoGrid.layer.render(in:UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -239,7 +298,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
-        
     }
     
     // animation manager
@@ -248,9 +306,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             if deviceOrientation == .portrait {
                 let position = mainPhotoGrid.center.y
                 let translation = gesture.translation(in: self.view).y
-                
-               
-                
                 if let view = gesture.view {
                     if translation > 0 {
                         view.center = CGPoint(x: view.center.x , y: view.center.y)
@@ -266,9 +321,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                             self.mainPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -150)
                         }, completion: nil)
                     sharePhotoGrid()
-                    mainPhotoGrid.alpha = 0
-                    resetGridPosition()
-                    
                 }
             } else if deviceOrientation == .landscapeRight || deviceOrientation == .landscapeLeft {
                 let position = mainPhotoGrid.center.x
@@ -280,33 +332,18 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                         view.center = CGPoint(x: view.center.x + translation*2 , y: view.center.y)
                     }
                 }
-                
                 gesture.velocity(in: self.mainPhotoGrid)
                 gesture.setTranslation(CGPoint.zero, in: self.view)
-                
                 if position <= 0 {
                     UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .transitionFlipFromTop, animations: {
                             self.mainPhotoGrid.transform = CGAffineTransform(translationX: -150, y: 0)
                         }, completion: nil)
                     sharePhotoGrid()
-                    mainPhotoGrid.alpha = 0
-                    resetGridPosition()
                 }
             }
         } else {
             shake()
-            
-            
         }
-        
     }
-    
- 
-
-    
-
-    
-    
- 
-    
 }
+
