@@ -9,10 +9,8 @@
 import Foundation
 import UIKit
 
-
-// style image et sauvegarde des image
-
 let view = ViewController()
+
 
 class Model {
 
@@ -23,14 +21,16 @@ class Model {
     enum ViewStatut {
         case incomplete, complete
     }
-
+    // default style
     var style: Style = .left
+    
+    // default grid
     var images = [UIImage(imageLiteralResourceName: "blueCross"),
                   UIImage(imageLiteralResourceName: "blueCross"),
                   UIImage(imageLiteralResourceName: "blueCross"),
                   UIImage(imageLiteralResourceName: "blueCross")]
     
-    
+    // list of images displayed in stackView
     var arrayOfImages: [[UIImage]] {
         switch style {
         case .left:
@@ -48,6 +48,7 @@ class Model {
         }
     }
     
+    // switch of viewStatut
     var viewStatut: ViewStatut = .incomplete
     var mainImageViewStatut: ViewStatut {
     switch viewStatut {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_5" orientation="landscape">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -23,11 +23,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Instagrid" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instagrid" textAlignment="center" lineBreakMode="wordWrap" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="aTf-2G-8Pa" userLabel="appName">
-                                <rect key="frame" x="345.66666666666669" y="10" width="205.00000000000006" height="52"/>
+                                <rect key="frame" x="125" y="54" width="164" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aTf-2G-8Pa" secondAttribute="height" multiplier="41:13" id="C5v-ma-LfK">
                                         <variation key="heightClass=compact" constant="41"/>
@@ -43,16 +43,16 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oA-mu-gHO" userLabel="mainPhotoGrid">
-                                <rect key="frame" x="305" y="77" width="286" height="286"/>
+                                <rect key="frame" x="20" y="261" width="374" height="374"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="zI1-aw-c0Z">
-                                        <rect key="frame" x="5" y="5" width="276" height="276"/>
+                                        <rect key="frame" x="5" y="5" width="364" height="364"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="q7y-vy-hWg" userLabel="Top Stack View">
-                                                <rect key="frame" x="0.0" y="0.0" width="276" height="135.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="179.66666666666666"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bep-Rn-dUm" userLabel="Bottom Stack View">
-                                                <rect key="frame" x="0.0" y="140.66666666666663" width="276" height="135.33333333333337"/>
+                                                <rect key="frame" x="0.0" y="184.66666666666669" width="364" height="179.33333333333331"/>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -80,7 +80,7 @@
                                 </connections>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="RdV-FU-7CU" userLabel="BottomView">
-                                <rect key="frame" x="786" y="82" width="80" height="250"/>
+                                <rect key="frame" x="64" y="762" width="286" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Of9-i4-8RW" userLabel="Left Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -140,7 +140,7 @@
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="udM-hc-8GD" userLabel="Center Stack View">
-                                        <rect key="frame" x="0.0" y="85" width="80" height="80"/>
+                                        <rect key="frame" x="103" y="0.0" width="80" height="80"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1L-hR-BZ2">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -197,7 +197,7 @@
                                         </variation>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1zj-Ke-ccj" userLabel="Right Stack View">
-                                        <rect key="frame" x="0.0" y="170" width="80" height="80"/>
+                                        <rect key="frame" x="206" y="0.0" width="80" height="80"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gy0-BF-rYk">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
@@ -271,7 +271,7 @@
                                 </variation>
                             </stackView>
                             <label autoresizesSubviews="NO" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="^ Swipe up to  share" textAlignment="center" lineBreakMode="clip" numberOfLines="3" minimumFontSize="11" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ul3-lh-TVk" userLabel="share">
-                                <rect key="frame" x="64" y="115" width="221" height="184"/>
+                                <rect key="frame" x="120" y="111" width="174" height="145"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ul3-lh-TVk" secondAttribute="height" multiplier="6:5" id="Hfs-ym-Gno"/>
                                     <constraint firstAttribute="width" secondItem="ul3-lh-TVk" secondAttribute="height" multiplier="6:5" id="W8O-PZ-WIz"/>
@@ -332,12 +332,12 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="4J3-ML-f2P"/>
-                                <exclude reference="DxN-TW-yt4"/>
-                                <exclude reference="o6D-K7-QgZ"/>
                                 <exclude reference="VKS-1g-8qq"/>
                                 <exclude reference="fks-fC-2mV"/>
                                 <exclude reference="9Yg-fU-Tw1"/>
                                 <exclude reference="bIA-Dw-wWU"/>
+                                <exclude reference="DxN-TW-yt4"/>
+                                <exclude reference="o6D-K7-QgZ"/>
                                 <exclude reference="Be7-TS-K7u"/>
                                 <exclude reference="K0h-zB-xLU"/>
                                 <exclude reference="NvL-Jv-nbn"/>
@@ -349,10 +349,6 @@
                                 <include reference="4J3-ML-f2P"/>
                                 <exclude reference="Cu3-x2-sOT"/>
                                 <exclude reference="ya6-ND-UYT"/>
-                                <include reference="DxN-TW-yt4"/>
-                                <include reference="n0e-4M-eKJ"/>
-                                <exclude reference="n9M-RF-LiD"/>
-                                <include reference="o6D-K7-QgZ"/>
                                 <include reference="VKS-1g-8qq"/>
                                 <include reference="fks-fC-2mV"/>
                                 <exclude reference="kjK-Y2-mih"/>
@@ -363,6 +359,10 @@
                                 <exclude reference="Z4j-GT-LId"/>
                                 <include reference="bIA-Dw-wWU"/>
                                 <include reference="y34-MV-YvK"/>
+                                <include reference="DxN-TW-yt4"/>
+                                <include reference="n0e-4M-eKJ"/>
+                                <exclude reference="n9M-RF-LiD"/>
+                                <include reference="o6D-K7-QgZ"/>
                                 <exclude reference="9fQ-tT-CPa"/>
                                 <exclude reference="Be7-TS-K7u"/>
                                 <exclude reference="K0h-zB-xLU"/>

@@ -19,14 +19,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         let orientation = UIDevice.current.orientation
         return orientation
     }
-    var origineCenteViewWidth: CGFloat {
-        let width = UIScreen.main.bounds.width / 2
-        return width
-    }
-    var origineCenterViewHeight: CGFloat {
-        let height = UIScreen.main.bounds.height / 2
-        return height
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +27,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         
     }
 
+    // change the text with orientation
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         setTextSwipeToShare()
     }
-
+    // select the text to display with orientation
     func setTextSwipeToShare() {
         if deviceOrientation == .portrait {
             self.swipeToShare.text = " ^ \n Swipe up \n to share"
@@ -47,6 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
             self.swipeToShare.text = " < \n Swipe left \n to share"
         }
     }
+    
     // Interface connection //
     
     @IBOutlet weak var mainPhotoGrid: UIView!
@@ -58,7 +52,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var swipeToShare: UILabel!
     @IBAction func didTapViewLeftMenu(_ sender: Any) {
         refreshBottomStyle()
-        if model.style == .left {
+        if model.style == .left { // reset the grid if tap on selectect style
             resetImagesToBackground()
         } else {
         model.style = .left
@@ -83,8 +77,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
         createMainView()
     }
+    
+    // switch case for gesture on grid
     @IBAction func photoGridManager(_ sender: UIPanGestureRecognizer) {
-        
         switch sender.state {
         case .began, .changed:
             photoGridAnimationManager(gesture: sender)
@@ -95,21 +90,17 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
     }
     
-    
+    // Get the current photo authorization state
     func haveAccessToPhotos() -> Bool {
-   // Get the current authorization state.
         let status = PHPhotoLibrary.authorizationStatus()
         var  accessPhotoAutorized = false
-        
-        
         switch status {
         case .notDetermined, .denied:
             PHPhotoLibrary.requestAuthorization({status in
                 if status == .authorized{
                     accessPhotoAutorized = true
                 } else {
-                    
-                    let alertController = UIAlertController(title: "Photo Library access denied",
+                   let alertController = UIAlertController(title: "Photo Library access denied",
                                                             message:  "You have denied access to photo library, activate it in the setting to use it",
                                                             preferredStyle: .alert)
                     let settingsAction = UIAlertAction(title: "Go to Setting",
@@ -117,7 +108,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
                         }
-                        
                         if UIApplication.shared.canOpenURL(settingsUrl) {
                             UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
                                 // Checking for setting is opened or not
@@ -128,10 +118,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
                     alertController.addAction(settingsAction)
                     // Cancel button action
                     let cancelAction = UIAlertAction(title: "Cancel", style: .default){ (_) -> Void in
-                        // Magic is here for cancel button
                     }
                     alertController.addAction(cancelAction)
-                    // This part is important to show the alert controller ( You may delete "self." from present )
+                    
                     self.present(alertController, animated: true, completion: nil)
                 }
             })
@@ -152,11 +141,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         return accessPhotoAutorized
     }
 
-    // Image picker //
+    // image picker cancelled
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
     }
     
+    // Image picker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let userImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             model.images[positionImageButton] = userImage
@@ -177,8 +167,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         return myButton
     }
     
+    // tap on image button in grid
     @objc func tapOnButton(sender:UIButton){
-        
         if haveAccessToPhotos() == true {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
@@ -268,7 +258,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         return gridIsComplete
     }
     
-    //    Shake the view
+    // shake the view
     private func shake() {
         UIView.animate(withDuration: 0.4,
                        delay: 0,
@@ -282,11 +272,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         resetGridPosition()
     }
     
-    //    share photoGrid
+    // share photoGrid
     func sharePhotoGrid() {
         // renderer UIView to UIImage
         UIGraphicsBeginImageContext(mainPhotoGrid.frame.size)
-        //UIGraphicsBeginImageContextWithOptions(CGSize(width: 1000, height: 1000), true, 1.0)
         mainPhotoGrid.layer.render(in:UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -304,41 +293,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func photoGridAnimationManager(gesture: UIPanGestureRecognizer) {
         if gridIsComplete() {
             if deviceOrientation == .portrait {
-                let position = mainPhotoGrid.center.y
                 let translation = gesture.translation(in: self.view).y
-                if let view = gesture.view {
-                    if translation > 0 {
-                        view.center = CGPoint(x: view.center.x , y: view.center.y)
-                    } else {
-                        view.center = CGPoint(x: view.center.x , y: view.center.y + translation*2)
+                if translation <= 0 {
+                    self.mainPhotoGrid.transform = CGAffineTransform(translationX: 0, y: translation)
+                    if translation < -150 || gesture.velocity(in: self.view).y > 1.0 {
+                        sharePhotoGrid()
                     }
                 }
-                gesture.velocity(in: self.mainPhotoGrid)
-                gesture.setTranslation(CGPoint.zero, in: self.view)
                 
-                if position <= 0 {
-                    UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .transitionFlipFromTop, animations: {
-                            self.mainPhotoGrid.transform = CGAffineTransform(translationX: 0, y: -150)
-                        }, completion: nil)
-                    sharePhotoGrid()
-                }
+            // case landscape mode
             } else if deviceOrientation == .landscapeRight || deviceOrientation == .landscapeLeft {
-                let position = mainPhotoGrid.center.x
                 let translation = gesture.translation(in: self.view).x
-                if let view = gesture.view {
-                    if translation > 0 {
-                        view.center = CGPoint(x: view.center.x , y: view.center.y)
-                    } else {
-                        view.center = CGPoint(x: view.center.x + translation*2 , y: view.center.y)
+                if translation <= 0 {
+                    self.mainPhotoGrid.transform = CGAffineTransform(translationX: translation, y: 0)
+                    if translation < -150 || gesture.velocity(in: self.view).x > 1.0 {
+                        sharePhotoGrid()
                     }
-                }
-                gesture.velocity(in: self.mainPhotoGrid)
-                gesture.setTranslation(CGPoint.zero, in: self.view)
-                if position <= 0 {
-                    UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 1, options: .transitionFlipFromTop, animations: {
-                            self.mainPhotoGrid.transform = CGAffineTransform(translationX: -150, y: 0)
-                        }, completion: nil)
-                    sharePhotoGrid()
                 }
             }
         } else {
